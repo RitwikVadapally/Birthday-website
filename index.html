@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday ✨</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Intro overlay (1 tap starts music reliably) -->
+  <div id="intro" class="intro">
+    <div class="introCard">
+      <p class="introTag">A little birthday gift 🎁</p>
+      <h1 class="introTitle">Tap to open ✨</h1>
+      <p class="introSub">Music + surprises inside</p>
+      <button id="startBtn" class="btn primary big">Open</button>
+      <p class="hint">Best with sound on 🔊</p>
+    </div>
+  </div>
+
+  <div class="bg"></div>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header class="card">
+      <p class="tag">A tiny website gift 🎁</p>
+      <h1 id="title"></h1>
+      <p class="sub">Made with a lot of love and zero money 💛</p>
+
+      <div class="actions">
+        <button id="revealBtn" class="btn primary">Click for the surprise ✨</button>
+        <button id="musicBtn" class="btn">Pause music ❚❚</button>
+      </div>
+
+      <audio id="audio" preload="auto" loop>
+        <!-- Put an MP3 in the same folder and name it song.mp3 -->
+        <source src="song.mp3" type="audio/mpeg" />
+      </audio>
+    </header>
+
+    <section id="surprise" class="grid hidden">
+      <button class="tile" data-open="1">Open when you want to smile 😊</button>
+      <button class="tile" data-open="2">Open when life feels heavy 🌧️</button>
+      <button class="tile" data-open="3">Open when you need confidence 🌟</button>
+      <button class="tile" data-open="4">Open when you miss me 🤍</button>
+      <button class="tile" data-open="5">Open when it’s your day 🎂</button>
+      <button class="tile" data-open="6">Open when you can’t sleep 🌙</button>
+    </section>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Message">
+      <div class="modalCard">
+        <button id="closeModal" class="close" aria-label="Close">✕</button>
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>— from <span class="sig">[YOUR NAME]</span> ✍️</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
