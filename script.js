@@ -96,10 +96,21 @@ document.querySelectorAll(".tile").forEach((btn) => {
     modal.classList.remove("hidden");
 
     openedCards++;
-    if (openedCards === 3 && finalNote) {
-      finalNote.classList.remove("hidden");
-      typeFinalMessage();
-    }
+
+if (
+  finalNote &&
+  openedCards >= 3 &&
+  finalNote.classList.contains("hidden")
+) {
+  finalNote.classList.remove("hidden");
+  typeFinalMessage();
+
+  // Mobile-friendly: bring it into view after the modal closes
+  setTimeout(() => {
+    finalNote.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 250);
+}
+
   });
 });
 
