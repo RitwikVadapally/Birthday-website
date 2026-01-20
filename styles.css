@@ -109,8 +109,10 @@
   }
   .tile:hover{ transform: translateY(-1px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
   
-  .hidden{ display:none; }
+  /* IMPORTANT: make hidden always win */
+  .hidden{ display:none !important; }
   
+  /* Modal */
   .modal{
     position:fixed; inset:0;
     background: rgba(0,0,0,.28);
@@ -118,16 +120,17 @@
     align-items:center;
     justify-content:center;
     padding: 18px;
-    z-index: 10;
+    z-index: 9999; /* ensure modal sits above everything */
   }
   
   .modalCard{
     width:min(620px, 96vw);
-    background: rgba(255,255,255,.9);
+    background: rgba(255,255,255,.95);
     border-radius: 18px;
     padding: 20px 18px 18px;
     box-shadow: var(--shadow);
     position:relative;
+    z-index: 10000; /* above overlay */
     animation: pop .18s ease-out;
   }
   
@@ -136,22 +139,38 @@
     to{ transform: scale(1); opacity:1; }
   }
   
-  .modalCard h2{ margin: 8px 0 8px; }
+  /* Missing in your file earlier: title styling */
+  .modalCard h2{
+    margin: 8px 0 10px;
+    color: #111;
+  }
+  
+  /* Force readable body text */
   .modalCard p{
     margin:0;
-    color: rgba(27,27,27,.75);
-    line-height:1.55;
+    color: #1b1b1b;
+    line-height:1.6;
     font-size: 16px;
   }
   
   .close{
     position:absolute;
-    right:10px; top:10px;
+    right:10px;
+    top:10px;
     border:none;
     background: rgba(0,0,0,.06);
     border-radius: 10px;
     padding:6px 10px;
     cursor:pointer;
+    transition: background-color .2s ease;
+    z-index: 10001; /* above everything in modal */
+  }
+  
+  .close:hover{ background: rgba(0,0,0,.12); }
+  
+  .close:focus-visible{
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
   }
   
   .footer{

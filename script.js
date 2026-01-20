@@ -59,18 +59,32 @@ You’re safe. Tomorrow can wait. For now, rest.`
 };
 
 document.querySelectorAll(".tile").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const key = btn.getAttribute("data-open");
-    modalTitle.textContent = messages[key].t;
-    modalText.textContent = messages[key].b;
-    modal.classList.remove("hidden");
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+  
+      const key = btn.getAttribute("data-open");
+      modalTitle.textContent = messages[key].t;
+      modalText.textContent = messages[key].b;
+      modal.classList.remove("hidden");
+    });
   });
-});
+  
 
-closeModal.addEventListener("click", () => modal.classList.add("hidden"));
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) modal.classList.add("hidden");
-});
+  closeModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    modal.classList.add("hidden");
+  });  
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  });
+  
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") modal.classList.add("hidden");
+  });
+  
 
 // Confetti (no library)
 function confettiBurst(){
@@ -103,6 +117,7 @@ let playing = false;
 
 // Start experience (reliable audio start)
 startBtn.addEventListener("click", async () => {
+    modal.classList.add("hidden");
   try {
     await audio.play();
     playing = true;
