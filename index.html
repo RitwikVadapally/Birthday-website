@@ -24,10 +24,14 @@
 
   <main class="wrap">
     <header class="card">
-      <p class="tag">A tiny website gift 🎁</p>
-      <h1 id="title"></h1>
-      <p class="sub">Made with a lot of love and zero money 💛</p>
-
+        <div class="hero">
+            <p class="tag">A small gift for your special day!</p>
+            <h1 id="title"></h1>
+            <p class="heroSub">
+              This page exists just to make you smile 💛
+            </p>
+          </div>
+          
       <div class="actions">
         <button id="revealBtn" class="btn primary">Click for the surprise ✨</button>
         <button id="musicBtn" class="btn">Pause music ❚❚</button>
@@ -38,6 +42,15 @@
         <source src="song.mp3" type="audio/mpeg" />
       </audio>
     </header>
+
+    <section class="admire hidden" id="admire">
+        <h2 class="admireTitle">Things I admire about you 💛</h2>
+        <p class="admireText" id="admireText"></p>
+        <button class="btn primary" id="admireBtn">
+          Reveal one ✨
+        </button>
+      </section>
+      
 
     <section id="surprise" class="grid hidden">
       <button class="tile" data-open="1">Open when you want to smile 😊</button>
@@ -62,5 +75,6 @@
   </main>
 
   <script src="script.js"></script>
+  <div class="hearts" aria-hidden="true"></div>
 </body>
 </html>

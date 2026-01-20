@@ -7,6 +7,7 @@
   }
   
   *{ box-sizing:border-box; }
+  
   body{
     margin:0;
     min-height:100vh;
@@ -15,21 +16,76 @@
     overflow-x:hidden;
   }
   
+  /* ---------- Background layers ---------- */
   .bg{
     position:fixed; inset:0;
-    background: radial-gradient(circle at 20% 10%, #ffe1f0 0%, transparent 45%),
-                radial-gradient(circle at 80% 20%, #d9f6ff 0%, transparent 45%),
-                radial-gradient(circle at 50% 90%, #fff2c6 0%, transparent 55%),
-                linear-gradient(135deg, #fff7fb, #f4fbff);
+    background:
+      radial-gradient(circle at 20% 10%, #ffe1f0 0%, transparent 45%),
+      radial-gradient(circle at 80% 20%, #d9f6ff 0%, transparent 45%),
+      radial-gradient(circle at 50% 90%, #fff2c6 0%, transparent 55%),
+      linear-gradient(135deg, #fff7fb, #f4fbff);
+    z-index:-3;
+  }
+  
+  .sparkles::before,
+  .sparkles::after{
+    content:"";
+    position:fixed; inset:-50px;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle, rgba(255,182,217,.65) 1px, transparent 2px),
+      radial-gradient(circle, rgba(191,239,255,.6) 1px, transparent 2px),
+      radial-gradient(circle, rgba(255,242,198,.6) 1px, transparent 2px);
+    background-size: 120px 120px, 160px 160px, 220px 220px;
+    background-position: 0 0, 40px 60px, 80px 120px;
+    opacity:.45;
+    animation: drift 28s linear infinite;
     z-index:-2;
   }
   
+  .sparkles::after{
+    opacity:.35;
+    filter: blur(1px);
+    animation-duration: 42s;
+  }
+  
+  .hearts::before,
+  .hearts::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle, rgba(255,182,217,.35) 6px, transparent 7px),
+      radial-gradient(circle, rgba(255,182,217,.25) 4px, transparent 5px),
+      radial-gradient(circle, rgba(255,182,217,.2) 3px, transparent 4px);
+    background-size: 140px 140px, 200px 200px, 260px 260px;
+    background-position: 0 0, 80px 120px, 160px 240px;
+    animation: floatHearts 40s linear infinite;
+    z-index:-1;
+  }
+  
+  .hearts::after{
+    opacity:.5;
+    animation-duration: 60s;
+  }
+  
+  @keyframes drift{
+    from{ transform: translate3d(0,0,0); }
+    to{ transform: translate3d(-120px,-160px,0); }
+  }
+  
+  @keyframes floatHearts{
+    from{ transform: translateY(0); }
+    to{ transform: translateY(-400px); }
+  }
+  
+  /* ---------- Layout ---------- */
   .wrap{
     width:min(980px, 92vw);
-    margin: 44px auto 22px;
+    margin: 60px auto 40px;
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:26px;
   }
   
   .card{
@@ -42,28 +98,54 @@
     position:relative;
   }
   
+  /* ---------- Hero ---------- */
+  .hero{
+    text-align:center;
+    padding:10px 6px 6px;
+  }
+  
+  .heroSub{
+    margin-top:12px;
+    font-size:16px;
+    color:rgba(27,27,27,.6);
+    line-height:1.6;
+  }
+  
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:-20px;
+    background: radial-gradient(circle at top, rgba(255,182,217,.25), transparent 60%);
+    z-index:-1;
+    pointer-events:none;
+  }
+  
+  /* ---------- Text ---------- */
   .tag{
     display:inline-block;
     padding:7px 10px;
     border-radius:999px;
     background: rgba(255,255,255,.8);
     border:1px solid rgba(0,0,0,.06);
-    margin:0 0 10px 0;
-    font-size: 13px;
+    margin-bottom:10px;
+    font-size:13px;
   }
   
   h1{
     margin:0;
     font-size: clamp(28px, 4vw, 44px);
-    letter-spacing: -0.02em;
+    letter-spacing:-0.02em;
     line-height:1.05;
   }
   
-  .sub{
-    margin:10px 0 0;
-    color: var(--muted);
+  .footer{
+    text-align:center;
+    color: rgba(27,27,27,.55);
+    font-size:14px;
+    margin-top:6px;
   }
   
+  /* ---------- Buttons ---------- */
   .actions{
     display:flex;
     gap:10px;
@@ -75,82 +157,121 @@
     border:1px solid rgba(0,0,0,.08);
     background: rgba(255,255,255,.85);
     padding:10px 14px;
-    border-radius: 12px;
+    border-radius:12px;
     cursor:pointer;
     transition: transform .12s ease, box-shadow .12s ease;
   }
-  .btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.08); }
+  
+  .btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.08);
+  }
+  
   .btn.primary{
     background: linear-gradient(135deg, #ffb6d9, #bfefff);
-    border: none;
+    border:none;
   }
+  
+  .btn.big{
+    padding:12px 18px;
+    border-radius:14px;
+    font-size:16px;
+  }
+  
+  /* ---------- Cards ---------- */
+  #surprise{ margin-top:30px; }
   
   .grid{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
     gap:12px;
   }
-  @media (max-width: 760px){
-    .grid{ grid-template-columns: repeat(2, 1fr); }
+  
+  @media (max-width:760px){
+    .grid{ grid-template-columns: repeat(2,1fr); }
   }
-  @media (max-width: 460px){
-    .grid{ grid-template-columns: 1fr; }
+  @media (max-width:460px){
+    .grid{ grid-template-columns:1fr; }
   }
   
   .tile{
-    padding:16px 14px;
-    border-radius: 16px;
-    border:1px solid rgba(0,0,0,.08);
-    background: rgba(255,255,255,.78);
+    padding:18px 16px;
+    border-radius:18px;
+    border:1px solid rgba(0,0,0,.06);
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,.95),
+      rgba(255,245,250,.9)
+    );
+    font-size:15px;
+    line-height:1.4;
     cursor:pointer;
-    transition: transform .12s ease, box-shadow .12s ease;
-    text-align:left;
-    font-size: 15px;
-  }
-  .tile:hover{ transform: translateY(-1px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    transition: transform .2s ease, box-shadow .2s ease, background .3s ease;
   
-  /* IMPORTANT: make hidden always win */
+    /* animation */
+    opacity:0;
+    transform: translateY(20px);
+    animation: cardFadeIn .6s ease forwards;
+  }
+  
+  .tile:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
+  }
+  
+  .tile:nth-child(1){ animation-delay:.1s; }
+  .tile:nth-child(2){ animation-delay:.2s; }
+  .tile:nth-child(3){ animation-delay:.3s; }
+  .tile:nth-child(4){ animation-delay:.4s; }
+  .tile:nth-child(5){ animation-delay:.5s; }
+  .tile:nth-child(6){ animation-delay:.6s; }
+  
+  @keyframes cardFadeIn{
+    to{
+      opacity:1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ---------- Modal ---------- */
   .hidden{ display:none !important; }
   
-  /* Modal */
   .modal{
     position:fixed; inset:0;
     background: rgba(0,0,0,.28);
     display:flex;
     align-items:center;
     justify-content:center;
-    padding: 18px;
-    z-index: 9999; /* ensure modal sits above everything */
+    padding:18px;
+    z-index:9999;
   }
   
   .modalCard{
-    width:min(620px, 96vw);
+    width:min(620px,96vw);
     background: rgba(255,255,255,.95);
-    border-radius: 18px;
-    padding: 20px 18px 18px;
+    border-radius:18px;
+    padding:20px 18px;
     box-shadow: var(--shadow);
+    animation: pop .25s ease-out;
     position:relative;
-    z-index: 10000; /* above overlay */
-    animation: pop .18s ease-out;
   }
   
   @keyframes pop{
-    from{ transform: scale(.97); opacity:.7; }
-    to{ transform: scale(1); opacity:1; }
+    from{ transform: scale(.96) translateY(10px); opacity:0; }
+    to{ transform: scale(1) translateY(0); opacity:1; }
   }
   
-  /* Missing in your file earlier: title styling */
   .modalCard h2{
-    margin: 8px 0 10px;
-    color: #111;
+    margin:8px 0 10px;
+    color:#111;
   }
   
-  /* Force readable body text */
   .modalCard p{
     margin:0;
-    color: #1b1b1b;
+    font-size:16px;
     line-height:1.6;
-    font-size: 16px;
+    color:#1b1b1b;
   }
   
   .close{
@@ -159,106 +280,77 @@
     top:10px;
     border:none;
     background: rgba(0,0,0,.06);
-    border-radius: 10px;
+    border-radius:10px;
     padding:6px 10px;
     cursor:pointer;
-    transition: background-color .2s ease;
-    z-index: 10001; /* above everything in modal */
   }
   
-  .close:hover{ background: rgba(0,0,0,.12); }
-  
-  .close:focus-visible{
-    outline: 2px solid #0066cc;
-    outline-offset: 2px;
-  }
-  
-  .footer{
+  /* ---------- Admire section ---------- */
+  .admire{
+    margin-top:40px;
+    padding:26px 20px;
+    border-radius:20px;
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 14px 40px rgba(0,0,0,.1);
     text-align:center;
-    color: rgba(27,27,27,.55);
-    font-size: 14px;
-    margin-top: 6px;
+    animation: pop .4s ease-out;
   }
   
-  /* Sparkles background animation */
-  .sparkles::before,
-  .sparkles::after{
-    content:"";
-    position:fixed; inset:-50px;
-    background-image:
-      radial-gradient(circle, rgba(255,182,217,.65) 1px, transparent 2px),
-      radial-gradient(circle, rgba(191,239,255,.6) 1px, transparent 2px),
-      radial-gradient(circle, rgba(255,242,198,.6) 1px, transparent 2px);
-    background-size: 120px 120px, 160px 160px, 220px 220px;
-    background-position: 0 0, 40px 60px, 80px 120px;
-    opacity:.55;
-    animation: drift 14s linear infinite;
-    z-index:-1;
-  }
-  .sparkles::after{
-    opacity:.35;
-    filter: blur(1px);
-    animation-duration: 22s;
+  .admireTitle{
+    margin-bottom:14px;
+    font-size:22px;
   }
   
-  @keyframes drift{
-    from{ transform: translate3d(0,0,0); }
-    to{ transform: translate3d(-120px,-160px,0); }
+  .admireText{
+    min-height:48px;
+    margin-bottom:18px;
+    font-size:17px;
+    line-height:1.6;
+    color:#222;
+    opacity:0;
+    transition: opacity .4s ease;
   }
   
-  /* Intro overlay */
+  .admireText.show{
+    opacity:1;
+  }
+  
+  /* ---------- Intro ---------- */
   .intro{
     position:fixed; inset:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:18px;
     background: rgba(255,255,255,.35);
     backdrop-filter: blur(14px);
-    z-index: 50;
+    z-index:50;
   }
   
   .introCard{
-    width:min(680px, 96vw);
+    width:min(680px,96vw);
     background: rgba(255,255,255,.85);
-    border:1px solid rgba(0,0,0,.06);
-    border-radius: 22px;
+    border-radius:22px;
     box-shadow: 0 20px 60px rgba(0,0,0,.14);
-    padding: 22px 18px;
+    padding:22px 18px;
     text-align:center;
-    animation: pop .2s ease-out;
   }
   
   .introTag{
-    display:inline-block;
-    padding:7px 10px;
-    border-radius:999px;
-    background: rgba(255,255,255,.9);
-    border:1px solid rgba(0,0,0,.06);
-    margin:0 0 10px 0;
-    font-size: 13px;
+    font-size:13px;
+    margin-bottom:10px;
   }
   
   .introTitle{
-    margin: 8px 0 6px;
-    font-size: clamp(28px, 5vw, 44px);
-    letter-spacing: -0.02em;
+    font-size: clamp(28px,5vw,44px);
   }
   
   .introSub{
-    margin: 0 0 14px;
+    margin-bottom:14px;
     color: rgba(27,27,27,.65);
   }
   
-  .btn.big{
-    padding: 12px 18px;
-    border-radius: 14px;
-    font-size: 16px;
-  }
-  
   .hint{
-    margin: 12px 0 0;
+    font-size:13px;
     color: rgba(27,27,27,.55);
-    font-size: 13px;
   }
   
