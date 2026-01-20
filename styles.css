@@ -488,3 +488,124 @@ body.musicOn .card{
     50%{ height:12px; }
   }
   
+  /* --- Intro: make it feel special --- */
+.introCard{
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* soft breathing glow */
+  .introCard{
+    animation: introBreathe 3.2s ease-in-out infinite;
+  }
+  
+  @keyframes introBreathe{
+    0%,100% { transform: translateY(0); box-shadow: 0 20px 60px rgba(0,0,0,.14); }
+    50%     { transform: translateY(-2px); box-shadow: 0 28px 80px rgba(0,0,0,.18); }
+  }
+  
+  /* sparkly gradient sweep */
+  .introCard::before{
+    content:"";
+    position:absolute;
+    inset:-40%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,182,217,.35), transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(191,239,255,.35), transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(255,242,198,.35), transparent 45%);
+    filter: blur(8px);
+    opacity:.9;
+    animation: introGlowMove 8s linear infinite;
+    pointer-events:none;
+  }
+  
+  @keyframes introGlowMove{
+    from{ transform: translate3d(-4%, -2%, 0); }
+    to{ transform: translate3d(4%, 2%, 0); }
+  }
+  
+  /* subtle sparkle dots overlay */
+  .introCard::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(circle, rgba(255,182,217,.35) 1px, transparent 2px),
+      radial-gradient(circle, rgba(191,239,255,.35) 1px, transparent 2px),
+      radial-gradient(circle, rgba(255,242,198,.35) 1px, transparent 2px);
+    background-size: 120px 120px, 160px 160px, 220px 220px;
+    background-position: 0 0, 30px 60px, 80px 120px;
+    opacity:.35;
+    animation: drift 18s linear infinite;
+    pointer-events:none;
+  }
+  
+  /* button shimmer */
+  #startBtn{
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #startBtn::after{
+    content:"";
+    position:absolute;
+    top:-40%;
+    left:-60%;
+    width:60%;
+    height:180%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+    transform: rotate(20deg);
+    animation: btnShimmer 2.8s ease-in-out infinite;
+    pointer-events:none;
+  }
+  
+  @keyframes btnShimmer{
+    0%{ left:-60%; opacity:0; }
+    15%{ opacity:1; }
+    45%{ left:120%; opacity:0; }
+    100%{ left:120%; opacity:0; }
+  }
+
+  /* --- Paw print ambience (intro) --- */
+/* --- Intro paw ambience (premium) --- */
+.paws{
+    position: relative;
+    width: 100%;
+    height: 54px;
+    margin: 10px 0 4px;
+    pointer-events: none;
+  }
+  
+  .paws::before,
+  .paws::after{
+    content:"🐾   🐾   🐾   🐾";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    opacity: .55;
+    filter: blur(.2px);
+    animation: pawsDrift 5.2s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  
+  .paws::after{
+    content:"🐾     🐾     🐾";
+    font-size: 18px;
+    opacity: .30;
+    animation-duration: 7.2s;
+    animation-delay: .6s;
+  }
+  
+  @keyframes pawsDrift{
+    0%,100% { transform: translate(-50%, -50%) translateY(0) translateX(0); }
+    50%     { transform: translate(-50%, -50%) translateY(-8px) translateX(10px); }
+  }
+  
+  .pawHint{
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: rgba(27,27,27,.55);
+  }
+  
+  

@@ -49,6 +49,18 @@ function typeFinalMessage(){
   type();
 }
 
+const introSub = document.querySelector(".introSub");
+const introLine = "A little birthday moment — made with love";
+let introI = 0;
+
+function typeIntro(){
+  if (!introSub) return;
+  introSub.textContent = introLine.slice(0, introI++);
+  if (introI <= introLine.length) setTimeout(typeIntro, 50);
+}
+typeIntro();
+
+
 // -------------------- Typewriter effect --------------------
 const headline = `Happy Birthday, ${HER_NAME} ✨`;
 let ti = 0;
@@ -262,3 +274,39 @@ document.querySelectorAll(".tile").forEach(tile => {
     tile.style.removeProperty("--my");
   });
 });
+
+function boop(x, y){
+    const b = document.createElement("div");
+    b.textContent = "boop!";
+    b.style.position = "fixed";
+    b.style.left = x + "px";
+    b.style.top = y + "px";
+    b.style.transform = "translate(-50%, -50%)";
+    b.style.fontFamily = '"Caveat", cursive';
+    b.style.fontSize = "22px";
+    b.style.opacity = "0";
+    b.style.pointerEvents = "none";
+    b.style.zIndex = "99999";
+    document.body.appendChild(b);
+  
+    b.animate(
+      [
+        { transform: "translate(-50%, -50%) scale(.9)", opacity: 0 },
+        { transform: "translate(-50%, -70%) scale(1)", opacity: 1 },
+        { transform: "translate(-50%, -95%) scale(.98)", opacity: 0 }
+      ],
+      { duration: 900, easing: "ease-out" }
+    );
+  
+    setTimeout(() => b.remove(), 950);
+  }
+  
+  const introCard = document.querySelector(".introCard");
+  if (introCard){
+    introCard.addEventListener("click", (e) => {
+      if (e.target && e.target.id === "startBtn") return;
+      boop(e.clientX, e.clientY);
+    });
+  }
+  
+  
