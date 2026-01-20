@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday ✨</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,6 +22,7 @@
 
   <div class="bg"></div>
   <div class="sparkles" aria-hidden="true"></div>
+  <div class="hearts" aria-hidden="true"></div>
 
   <main class="wrap">
     <header class="card">
@@ -34,7 +36,13 @@
           
       <div class="actions">
         <button id="revealBtn" class="btn primary">Click for the surprise ✨</button>
-        <button id="musicBtn" class="btn">Pause music ❚❚</button>
+        <button id="musicBtn" class="btn musicBtn">
+            <span class="musicLabel">Play music</span>
+            <span class="eq">
+              <i></i><i></i><i></i>
+            </span>
+          </button>
+          
       </div>
 
       <audio id="audio" preload="auto" loop>
@@ -69,12 +77,18 @@
       </div>
     </div>
 
+    <section id="finalNote" class="final hidden">
+        <p class="finalTag">Before you go…</p>
+        <p class="finalText" id="finalText"></p>
+      </section>
+      
+      
+
     <footer class="footer">
       <p>— from <span class="sig">Ritwik</span> ✍️</p>
     </footer>
   </main>
 
   <script src="script.js"></script>
-  <div class="hearts" aria-hidden="true"></div>
 </body>
 </html>

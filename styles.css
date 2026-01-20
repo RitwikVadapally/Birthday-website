@@ -353,4 +353,138 @@
     font-size:13px;
     color: rgba(27,27,27,.55);
   }
+
+  .final{
+    margin: 60px auto 20px;
+    max-width: 520px;
+    text-align: center;
+    padding: 22px 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 16px 40px rgba(0,0,0,.12);
+    animation: pop .5s ease-out;
+  }
+  
+  .finalTag{
+    font-size: 13px;
+    color: rgba(27,27,27,.55);
+    margin-bottom: 10px;
+  }
+  
+  .finalText{
+    font-size: 18px;
+    line-height: 1.7;
+    color: #222;
+  }
+
+  /* --- Music-synced (play state) ambiance --- */
+body.musicOn .card{
+    animation: musicGlow 2.6s ease-in-out infinite;
+  }
+  
+  body.musicOn .hero::after{
+    animation: musicHalo 2.6s ease-in-out infinite;
+  }
+  
+  @keyframes musicGlow{
+    0%, 100% { box-shadow: 0 18px 50px rgba(0,0,0,.12); transform: translateY(0); }
+    50%      { box-shadow: 0 22px 65px rgba(0,0,0,.15); transform: translateY(-1px); }
+  }
+  
+  @keyframes musicHalo{
+    0%, 100% { opacity: .45; filter: blur(0px); }
+    50%      { opacity: .75; filter: blur(1px); }
+  }
+  
+  /* Optional: make the music button subtly “alive” when playing */
+  body.musicOn #musicBtn{
+    animation: musicBtnPulse 1.6s ease-in-out infinite;
+  }
+  
+  @keyframes musicBtnPulse{
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-1px); }
+  }
+  
+  /* --- Card micro-interaction --- */
+.tile{
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+  }
+  
+  /* Soft light layer */
+  .tile::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(
+      120px 120px at var(--mx,50%) var(--my,50%),
+      rgba(255,182,217,.35),
+      transparent 60%
+    );
+    opacity:0;
+    transition: opacity .25s ease;
+    pointer-events:none;
+  }
+  
+  body.musicOn .tile:hover::after{
+    opacity:1;
+  }  
+  
+  .tile:hover{
+    transform: translateY(-6px) scale(1.015);
+  }
+  
+  /* --- Handwritten final note --- */
+.finalText{
+    font-family: "Caveat", cursive;
+    font-size: 22px;
+    line-height: 1.7;
+    letter-spacing: .02em;
+    white-space: pre-line;
+  }
+  
+  /* Optional: softer look on mobile */
+  @media (max-width: 500px){
+    .finalText{
+      font-size: 20px;
+    }
+  }
+
+  /* --- Tiny music equalizer --- */
+.musicBtn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  
+  .eq{
+    display:flex;
+    gap:3px;
+    align-items:flex-end;
+    height:12px;
+  }
+  
+  .eq i{
+    width:3px;
+    height:6px;
+    background:#444;
+    border-radius:2px;
+    opacity:.5;
+  }
+  
+  body.musicOn .eq i{
+    animation: eqBounce 1s ease-in-out infinite;
+    opacity:1;
+  }
+  
+  .eq i:nth-child(1){ animation-delay: 0s; }
+  .eq i:nth-child(2){ animation-delay: .15s; }
+  .eq i:nth-child(3){ animation-delay: .3s; }
+  
+  @keyframes eqBounce{
+    0%,100%{ height:6px; }
+    50%{ height:12px; }
+  }
   
