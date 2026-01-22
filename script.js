@@ -50,13 +50,13 @@ function typeFinalMessage(){
 }
 
 const introSub = document.querySelector(".introSub");
-const introLine = "A little birthday moment — made with love";
+const introLine = "A little birthday moment — made with love, just for you ✨";
 let introI = 0;
 
 function typeIntro(){
   if (!introSub) return;
   introSub.textContent = introLine.slice(0, introI++);
-  if (introI <= introLine.length) setTimeout(typeIntro, 50);
+  if (introI <= introLine.length) setTimeout(typeIntro, 40);
 }
 typeIntro();
 
@@ -72,12 +72,12 @@ typeTitle();
 
 // -------------------- Messages --------------------
 const messages = {
-  1: { t: "A tiny reason to smile 😊", b: `You have this calm, kind energy that makes things feel lighter.\nI hope today gives you the same comfort you give others.` },
-  2: { t: "For the heavy days 🌧️", b: `If today is ever too much, remember: you don’t have to carry it alone.\nYou’re stronger than you think, and you’re deeply cared for.` },
-  3: { t: "Confidence boost 🌟", b: `You’re genuinely impressive — not loudly, not for show… just real.\nBack yourself. You deserve good things.` },
-  4: { t: "When you miss me 🤍", b: `Consider this a warm hug you can open anytime.\nI’m always cheering for you, even from a distance.` },
-  5: { t: "It’s your day 🎂", b: `I’m grateful you exist.\nI hope this year feels like a soft upgrade: more peace, more wins, more you.` },
-  6: { t: "Late-night note 🌙", b: `Breathe. Slow shoulders. Unclench your jaw.\nYou’re safe. Tomorrow can wait. For now, rest.` }
+  1: { t: "A tiny reason to smile 😊", b: `You have a smile that changes the mood of a moment quietly, effortlessly.\nIt’s the kind that makes things feel lighter, calmer, better… even on ordinary days.\nI hope you never lose it. And I hope this brings it out right now.` },
+  2: { t: "For the heavy days 🌧️", b: `Some days are heavier than others Vyshulu, and that’s okay.\nYou don’t have to take everything on by yourself. People who care about you want to share that weight.\nI’m always around if you need me, in whatever way feels right.` },
+  3: { t: "Confidence boost 🌟", b: `If you’re questioning yourself, pause for a second.\nI’ve seen how you handle things, even the hard ones. You have a lot more strength and grace than you realize.\nYou’re doing better than you think. I hope seeing this helps you believe that a little more today.` },
+  4: { t: "When you miss me 🤍", b: `Consider this a warm hug you can open anytime, Vyshulu.\nYou don’t need to be okay right now. You don’t need to explain how you’re feeling either.\n Take a moment here - that’s enough. And remember, I’m always cheering for you, even from a tiny distance.` },
+  5: { t: "It’s your day 🎂", b: `Today’s a little brighter just because it’s your birthday.\nI hope you feel loved, appreciated, and reminded of how special you are — not just today, but always.\nHappy Birthday Vyshulu 🤍 I am really happy I get to be a part of your special day.` },
+  6: { t: "Late-night note 🌙", b: `Some nights are just like this, Vyshulu — quiet, a little restless.\nYou don’t have to worry about everything right now.\nTake a pause, relax, get some rest, and leave things for tomorrow.\nJust know I’m always cheering for you, even when things feel a little heavy.\nI hope this helps you feel a little calmer before you sleep.` }
 };
 
 function setMusicUI(isOn){
@@ -236,12 +236,15 @@ musicBtn.addEventListener("click", async () => {
 
 // -------------------- Admire section --------------------
 const admireList = [
-  "The way you stay calm even when things get heavy.",
-  "How you make people feel comfortable without even trying.",
-  "Your kindness — it’s quiet, but it’s real.",
-  "The way you think deeply and still stay gentle.",
-  "How you show up as yourself, unapologetically."
+  "The way your smile instantly calms me — it’s genuine, innocent, and comes straight from the heart.",
+  "How you’re quietly reserved at first, yet unexpectedly playful once someone truly gets to know you.",
+  "The way you showed up just for a few minutes that day — with genuine excitement and enthusiasm — and made it feel special.",
+  "Your childlike joy — the kind that isn’t loud or performative, just real and full of life.",
+  "The way you get shy when I look at you, even as you pretend to push me away.",
+  "Your honesty — you don’t pretend or do things for the sake of appearances.",
+  "Your thoughtfulness — the way you give from the heart, like gifting me a book and flowers without expecting anything back.",
 ];
+
 
 let admireIndex = 0;
 
